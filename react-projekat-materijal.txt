@@ -1,0 +1,44 @@
+***** REACT PROJECT *****
+
+
+WHAT SHOULD YOU DO ?
+
+- Crete Movie Watchlist app according to provided mockups
+
+- App could be used to search for movies, and add it to the watchlist
+
+
+HOW IT SHOULD WORK?
+
+- Each time you type something request is sent and results are shown below the Search
+
+- You can click + icon to add movie to the watchlist
+
+- Once movie is added, it's stored in firebase, and displayed on the page in To Watch section
+
+- Each movie displays Rating, Movie name as well as Genres
+
+- Once name is clicked, movie page should open (with different URL)
+
+- Movie page should display Movie details
+
+- When back button is clicked it should take you to the main page
+
+- When trash icon is clicked, movie should be removed from the list
+
+- When eye icon is clicked, movie should be moved to Watched section
+
+- When arrow up is clicked, movie should be moved one position up
+
+- When arrow down is clicked, movie should me moved one position down
+
+- When genre name is clicked, only movies including that genre should be displayed
+
+- When Reset filters button is clicked, all movies should be displayed again
+
+
+API
+
+- For movies use http://www.omdbapi.com (API key is needed, you should register to get it)
+
+- For storing your data use Firebase

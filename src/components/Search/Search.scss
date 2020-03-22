@@ -1,0 +1,80 @@
+header {
+  width: 100%;
+  padding: 10px 20px;
+
+  div#header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    h3#logo {
+      font-size: 2em;
+    }
+
+    div#input-div {
+      position: relative;
+
+      input {
+        padding: 5px 10px;
+        border: none;
+        outline: none;
+        width: 200px;
+        border-radius: 10px;
+      }
+
+      ul#searchList {
+        position: absolute;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 150px;
+        width: 200px;
+        padding: 10px 10px;
+        &::-webkit-scrollbar {
+          width: 12px;
+        }
+
+        &::-webkit-scrollbar-track {
+          -webkit-box-shadow: inset 0 0 1px white;
+          border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border-radius: 10px;
+          -webkit-box-shadow: inset 0 0 3px white;
+        }
+
+        li {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+          align-items: center;
+          padding: 0 5px;
+
+          &:hover {
+            background-color: white;
+            color: rgb(0, 7, 15);
+          }
+
+          span {
+            width: 70%;
+            cursor: default;
+          }
+
+          img {
+            height: 16px;
+            cursor: pointer;
+          }
+        }
+        img.loader {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100px;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}
