@@ -15,9 +15,7 @@ class Search extends Component {
   state = {
     searchTerm: "",
     results: {},
-    loading: false,
-    message: "",
-    cancel: ""
+    loading: false
   };
 
   fetchSearchResults = searchTerm => {
@@ -73,6 +71,7 @@ class Search extends Component {
 
   renderSearchResults = () => {
     const { results, loading, message } = this.state;
+    const { getMovieByTitle } = this.props;
 
     if (Object.keys(results).length && results.length) {
       return (
@@ -82,8 +81,13 @@ class Search extends Component {
           ) : (
             results.map(foundMovie => {
               return (
-                <li key={uuid()} className="foundMovie">
-                  <span> {foundMovie.Title} </span> <img src={add} alt="add" />
+                <li key={foundMovie.imdbID} className="foundMovie">
+                  <span> {foundMovie.Title} </span>{" "}
+                  <img
+                    src={add}
+                    alt="add"
+                    onClick={() => getMovieByTitle(foundMovie.Title)}
+                  />
                 </li>
               );
             })

@@ -1,0 +1,57 @@
+div#toWatchList {
+  h1 {
+    font-size: 2.5em;
+    margin: 30px 0;
+  }
+}
+
+div.toWatchMovie {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 20px;
+  align-items: flex-end;
+  border-bottom: 0.2px solid #aaa;
+
+  //   &:last-child {
+  //     border-bottom: none;
+  //   }
+
+  .content {
+    display: flex;
+
+    span.rating {
+      font-size: 2.5em;
+      border: 2px solid rgb(0, 195, 255);
+      border-radius: 100%;
+      padding: 10px;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: default;
+      margin-right: 20px;
+    }
+
+    div.movieInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      h2 {
+        font-size: 1.5em;
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+      }
+    }
+  }
+  div.icons {
+    display: flex;
+    justify-content: space-around;
+
+    width: 90px;
+    img {
+      cursor: pointer;
+    }
+  }
+}
