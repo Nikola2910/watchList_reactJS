@@ -7,12 +7,14 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 import { Search } from "./components/Search/Search";
 import { ToWatchList } from "./components/ToWatchList/ToWatchList";
+import { WatchedList } from "./components/WatchedList/WatchedList";
 
 class App extends Component {
-  state = { movieTitle: "", movieData: {}, toWatchData: [] };
+  state = { movieTitle: "", movieData: {}, toWatchData: [], watchedData: [] };
 
   componentDidMount() {
     this.fetchData();
+    this.fetchWatchedData();
   }
 
   fetchData() {
@@ -21,6 +23,16 @@ class App extends Component {
       .then(responseData => {
         this.setState({
           toWatchData: this.formatData(responseData)
+        });
+      });
+  }
+
+  fetchWatchedData() {
+    axios
+      .get(`https://towatchmovies.firebaseio.com/watchedMovies.json`)
+      .then(responseData => {
+        this.setState({
+          watchedData: this.formatData(responseData)
         });
       });
   }
@@ -62,6 +74,34 @@ class App extends Component {
     }).then(() => this.fetchData());
   };
 
+  deleteWatchedMovie = movieId => {
+    fetch(
+      `https://towatchmovies.firebaseio.com/watchedMovies/${movieId}.json`,
+      {
+        method: "DELETE"
+      }
+    ).then(() => this.fetchWatchedData());
+  };
+
+  moveToWatched = watchedMovie => {
+    this.deleteMovie(watchedMovie.id);
+
+    axios
+      .post(
+        `https://towatchmovies.firebaseio.com/watchedMovies.json`,
+        watchedMovie
+      )
+      .then(() =>
+        axios
+          .get(`https://towatchmovies.firebaseio.com/watchedMovies.json`)
+          .then(responseData => {
+            this.setState({
+              watchedData: this.formatData(responseData)
+            });
+          })
+      );
+  };
+
   formatData(responseData) {
     const data = [];
 
@@ -88,6 +128,12 @@ class App extends Component {
         <ToWatchList
           toWatchData={this.state.toWatchData}
           deleteMovie={this.deleteMovie}
+          moveToWatched={this.moveToWatched}
+        />
+
+        <WatchedList
+          watchedData={this.state.watchedData}
+          deleteWatchedMovie={this.deleteWatchedMovie}
         />
       </Fragment>
     );

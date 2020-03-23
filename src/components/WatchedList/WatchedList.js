@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import watched from "../../img/visibility.png";
+
 import trash from "../../img/trash.png";
-import "./ToWatchList.scss";
+import "./WatchedList.scss";
 
-class ToWatchList extends Component {
+class WatchedList extends Component {
   render() {
-    const { toWatchData, deleteMovie, moveToWatched } = this.props;
+    const { watchedData, deleteWatchedMovie } = this.props;
     return (
-      <div id="toWatchList">
+      <div id="watchedList">
         <div className="main-wrapper">
-          <h1>To Watch</h1>
+          <h1>Watched Movies</h1>
 
-          {toWatchData.map(movie => {
+          {watchedData.map(movie => {
             return (
-              <div key={movie.id} className="toWatchMovie">
+              <div key={movie.id} className="watchedMovie">
                 {/* left */}
                 <div className="content">
                   <span className="rating">{movie.data.imdbRating}</span>
@@ -26,14 +26,9 @@ class ToWatchList extends Component {
                 {/* right */}
                 <div className="icons">
                   <img
-                    src={watched}
-                    alt=""
-                    onClick={() => moveToWatched(movie)}
-                  />
-                  <img
                     src={trash}
                     alt=""
-                    onClick={() => deleteMovie(movie.id)}
+                    onClick={() => deleteWatchedMovie(movie.id)}
                   />
                 </div>
               </div>
@@ -45,4 +40,4 @@ class ToWatchList extends Component {
   }
 }
 
-export { ToWatchList };
+export { WatchedList };
