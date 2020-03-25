@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
+import Fade from "react-reveal/Fade";
 
 import "./reset.scss";
 import "./App.scss";
@@ -173,20 +174,22 @@ class App extends Component {
           </div>
         </header>
         <Route exact path="/">
-          <ToWatchList
-            hideSearchList={this.hideSearchList}
-            toWatchData={toWatchData}
-            deleteMovie={this.deleteMovie}
-            moveToWatched={this.moveToWatched}
-            showMovieDetails={this.showMovieDetails}
-          />
+          <Fade>
+            <ToWatchList
+              hideSearchList={this.hideSearchList}
+              toWatchData={toWatchData}
+              deleteMovie={this.deleteMovie}
+              moveToWatched={this.moveToWatched}
+              showMovieDetails={this.showMovieDetails}
+            />
 
-          <WatchedList
-            watchedData={watchedData}
-            deleteWatchedMovie={this.deleteWatchedMovie}
-            showMovieDetails={this.showMovieDetails}
-            hideSearchList={this.hideSearchList}
-          />
+            <WatchedList
+              watchedData={watchedData}
+              deleteWatchedMovie={this.deleteWatchedMovie}
+              showMovieDetails={this.showMovieDetails}
+              hideSearchList={this.hideSearchList}
+            />
+          </Fade>
         </Route>
         <Route path={`/${urlId}`}>
           {showDetails && <MovieDetails movieDetails={movieDetails} />}
