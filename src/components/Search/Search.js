@@ -4,6 +4,7 @@ import uuid from "react-uuid";
 import add from "../../img/plus.png";
 import loader from "../../img/loader.gif";
 import ReactTooltip from "react-tooltip";
+import Fade from "react-reveal/Fade";
 
 import "./Search.scss";
 
@@ -72,40 +73,47 @@ class Search extends Component {
 
   renderSearchResults = () => {
     const { results, loading, message } = this.state;
-    const { getMovieByTitle, showList } = this.props;
+    const { getMovieByTitle, showList, showSearchList } = this.props;
 
     if (Object.keys(results).length && results.length && showList) {
       return (
-        <ul id="searchList">
-          {loading ? (
-            <img src={loader} className="loader" alt="loader-gif" />
-          ) : (
-            results.map(foundMovie => {
-              return (
-                <li key={foundMovie.imdbID} className="foundMovie">
-                  <span> {foundMovie.Title} </span>{" "}
-                  <ReactTooltip
-                    id="add"
-                    place="top"
-                    effect="solid"
-                    type="info"
-                    backgroundColor="rgb(0, 174, 255);"
-                  >
-                    {" "}
-                    <span> Add to List </span>{" "}
-                  </ReactTooltip>
-                  <img
-                    data-tip
-                    data-for="add"
-                    src={add}
-                    alt="add"
-                    onClick={() => getMovieByTitle(foundMovie.Title)}
-                  />
-                </li>
-              );
-            })
-          )}
-        </ul>
+        <Fade top cascade>
+          <ul
+            id="searchList"
+            onClick={() => {
+              showSearchList();
+            }}
+          >
+            {loading ? (
+              <img src={loader} className="loader" alt="loader-gif" />
+            ) : (
+              results.map(foundMovie => {
+                return (
+                  <li key={foundMovie.imdbID} className="foundMovie">
+                    <span> {foundMovie.Title} </span>{" "}
+                    <ReactTooltip
+                      id="add"
+                      place="top"
+                      effect="solid"
+                      type="info"
+                      backgroundColor="rgb(0, 174, 255);"
+                    >
+                      {" "}
+                      <span> Add to List </span>{" "}
+                    </ReactTooltip>
+                    <img
+                      data-tip
+                      data-for="add"
+                      src={add}
+                      alt="add"
+                      onClick={() => getMovieByTitle(foundMovie.Title)}
+                    />
+                  </li>
+                );
+              })
+            )}
+          </ul>
+        </Fade>
       );
     }
   };
