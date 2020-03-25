@@ -3,19 +3,37 @@ import axios from "axios";
 
 import "./reset.scss";
 import "./App.scss";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import { Search } from "./components/Search/Search";
 import { ToWatchList } from "./components/ToWatchList/ToWatchList";
 import { WatchedList } from "./components/WatchedList/WatchedList";
+import { MovieDetails } from "./components/MovieDetails/MovieDetails";
 
 class App extends Component {
-  state = { movieTitle: "", movieData: {}, toWatchData: [], watchedData: [] };
+  state = {
+    movieTitle: "",
+    movieData: {},
+    toWatchData: [],
+    watchedData: [],
+    movieDetails: {},
+    showDetails: false,
+    urlId: "",
+    showList: false
+  };
 
   componentDidMount() {
     this.fetchData();
     this.fetchWatchedData();
   }
+
+  showSearchList = () => {
+    this.setState({ showList: true });
+  };
+
+  hideSearchList = () => {
+    this.setState({ showList: false });
+  };
 
   fetchData() {
     axios
@@ -102,6 +120,21 @@ class App extends Component {
       );
   };
 
+  showMovieDetails = id => {
+    axios
+      .get(`http://www.omdbapi.com/?apikey=649e3e66&i=${id}&plot=full`)
+      .then(response =>
+        this.setState(
+          {
+            movieDetails: response.data,
+            showDetails: true,
+            urlId: response.data.imdbID
+          },
+          () => console.log(this.state.urlId)
+        )
+      );
+  };
+
   formatData(responseData) {
     const data = [];
 
@@ -115,27 +148,50 @@ class App extends Component {
   }
 
   render() {
+    const {
+      toWatchData,
+      watchedData,
+      showDetails,
+      movieDetails,
+      urlId,
+      showList
+    } = this.state;
     return (
-      <Fragment>
+      <BrowserRouter>
         <header>
           <div className="main-wrapper">
             <div id="header">
-              <h3 id="logo">Movie Watchlist</h3>
-              <Search getMovieByTitle={this.getMovieByTitle} />
+              <Link to="/">
+                <h3 id="logo">Movie Watchlist</h3>
+              </Link>
+              <Search
+                showSearchList={this.showSearchList}
+                showList={showList}
+                getMovieByTitle={this.getMovieByTitle}
+              />
             </div>
           </div>
         </header>
-        <ToWatchList
-          toWatchData={this.state.toWatchData}
-          deleteMovie={this.deleteMovie}
-          moveToWatched={this.moveToWatched}
-        />
+        <Route exact path="/">
+          <ToWatchList
+            hideSearchList={this.hideSearchList}
+            toWatchData={toWatchData}
+            deleteMovie={this.deleteMovie}
+            moveToWatched={this.moveToWatched}
+            showMovieDetails={this.showMovieDetails}
+          />
 
-        <WatchedList
-          watchedData={this.state.watchedData}
-          deleteWatchedMovie={this.deleteWatchedMovie}
-        />
-      </Fragment>
+          <WatchedList
+            watchedData={watchedData}
+            deleteWatchedMovie={this.deleteWatchedMovie}
+            showMovieDetails={this.showMovieDetails}
+            hideSearchList={this.hideSearchList}
+          />
+        </Route>
+        <Route path={`/${urlId}`}>
+          {showDetails && <MovieDetails movieDetails={movieDetails} />}
+        </Route>
+      </BrowserRouter>
     );
   }
 }

@@ -1,0 +1,69 @@
+div#movie-details {
+  display: flex;
+  height: 80vh;
+  align-items: center;
+  width: 100%;
+  padding: 30px 0;
+  div.poster {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      border: 2px solid rgb(0, 195, 255);
+
+      border-radius: 15px;
+      transition: 0.4s;
+
+      &:hover {
+        // transform: scale(1.02);
+        box-shadow: 0px 0px 10px 2px rgb(0, 195, 255);
+      }
+    }
+  }
+
+  div.details {
+    width: 50%;
+    position: relative;
+
+    span.rating-big {
+      position: absolute;
+      right: 0;
+      font-size: 1.6em;
+      border: 2px solid rgb(0, 195, 255);
+      border-radius: 100%;
+      padding: 10px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: default;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      span {
+        color: rgb(0, 195, 255);
+      }
+    }
+    h3 {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      line-height: 1.2em;
+      span {
+        color: rgb(0, 195, 255);
+      }
+      div.plot {
+        margin-top: 15px;
+      }
+    }
+    h3.actors {
+      display: flex;
+    }
+    h3:last-child {
+      margin-top: 1.5em;
+    }
+  }
+}

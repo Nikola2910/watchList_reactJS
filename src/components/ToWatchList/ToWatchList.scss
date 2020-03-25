@@ -2,6 +2,7 @@ div#toWatchList {
   h1 {
     font-size: 2.5em;
     margin: 30px 0;
+    font-weight: bold;
   }
 }
 
@@ -42,14 +43,15 @@ div.toWatchMovie {
         font-size: 1.5em;
         color: rgb(0, 195, 255);
         font-weight: bold;
+        cursor: pointer;
       }
     }
   }
   div.icons {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 
-    width: 90px;
+    width: 70px;
     img {
       cursor: pointer;
     }

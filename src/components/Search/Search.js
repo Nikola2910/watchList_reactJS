@@ -3,6 +3,7 @@ import axios from "axios";
 import uuid from "react-uuid";
 import add from "../../img/plus.png";
 import loader from "../../img/loader.gif";
+import ReactTooltip from "react-tooltip";
 
 import "./Search.scss";
 
@@ -71,9 +72,9 @@ class Search extends Component {
 
   renderSearchResults = () => {
     const { results, loading, message } = this.state;
-    const { getMovieByTitle } = this.props;
+    const { getMovieByTitle, showList } = this.props;
 
-    if (Object.keys(results).length && results.length) {
+    if (Object.keys(results).length && results.length && showList) {
       return (
         <ul id="searchList">
           {loading ? (
@@ -83,7 +84,19 @@ class Search extends Component {
               return (
                 <li key={foundMovie.imdbID} className="foundMovie">
                   <span> {foundMovie.Title} </span>{" "}
+                  <ReactTooltip
+                    id="add"
+                    place="top"
+                    effect="solid"
+                    type="info"
+                    backgroundColor="rgb(0, 174, 255);"
+                  >
+                    {" "}
+                    <span> Add to List </span>{" "}
+                  </ReactTooltip>
                   <img
+                    data-tip
+                    data-for="add"
                     src={add}
                     alt="add"
                     onClick={() => getMovieByTitle(foundMovie.Title)}
@@ -99,10 +112,14 @@ class Search extends Component {
 
   render() {
     const { searchTerm, loading } = this.state;
+    const { showSearchList } = this.props;
 
     return (
       <div id="input-div">
         <input
+          onClick={() => {
+            showSearchList();
+          }}
           type="text"
           value={searchTerm}
           placeholder="Search movie"
