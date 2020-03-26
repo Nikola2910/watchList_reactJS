@@ -17,6 +17,7 @@ class ToWatchList extends Component {
       showMovieDetails,
       hideSearchList
     } = this.props;
+
     return (
       <div
         id="toWatchList"
@@ -25,8 +26,9 @@ class ToWatchList extends Component {
         }}
       >
         <div className="main-wrapper">
-          <h1>To Watch</h1>
-
+          <div className="title-selector">
+            <h1>To Watch</h1>
+          </div>
           {toWatchData.map(movie => {
             return (
               <div key={movie.id} className="toWatchMovie">

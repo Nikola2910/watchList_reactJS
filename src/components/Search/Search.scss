@@ -19,7 +19,7 @@ header {
         padding: 5px 10px;
         border: none;
         outline: none;
-        width: 200px;
+        width: 300px;
         border-radius: 10px;
         transition: 0.4s;
 
@@ -29,13 +29,14 @@ header {
       }
 
       ul#searchList {
+        background-color: rgb(0, 7, 15);
         position: absolute;
         overflow-y: scroll;
         overflow-x: hidden;
         height: 150px;
-        width: 200px;
+        width: 300px;
         padding: 10px 10px;
-        z-index: 10;
+        z-index: 999999;
         &::-webkit-scrollbar {
           width: 12px;
         }
@@ -58,6 +59,7 @@ header {
           align-items: center;
           padding: 5px 5px;
           border-radius: 5px;
+          z-index: 99999;
 
           &:hover {
             background-color: white;
@@ -86,4 +88,12 @@ header {
       }
     }
   }
+}
+
+div.half {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }

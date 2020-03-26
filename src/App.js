@@ -10,6 +10,7 @@ import { Search } from "./components/Search/Search";
 import { ToWatchList } from "./components/ToWatchList/ToWatchList";
 import { WatchedList } from "./components/WatchedList/WatchedList";
 import { MovieDetails } from "./components/MovieDetails/MovieDetails";
+import { Filter } from "./components/Filter/Filter";
 
 class App extends Component {
   state = {
@@ -20,7 +21,8 @@ class App extends Component {
     movieDetails: {},
     showDetails: false,
     urlId: "",
-    showList: false
+    showList: false,
+    search: true
   };
 
   componentDidMount() {
@@ -129,7 +131,8 @@ class App extends Component {
           {
             movieDetails: response.data,
             showDetails: true,
-            urlId: response.data.imdbID
+            urlId: response.data.imdbID,
+            search: false
           },
           () => console.log(this.state.urlId)
         )
@@ -148,6 +151,10 @@ class App extends Component {
     return data;
   }
 
+  showSearch = () => {
+    this.setState({ search: true });
+  };
+
   render() {
     const {
       toWatchData,
@@ -155,26 +162,39 @@ class App extends Component {
       showDetails,
       movieDetails,
       urlId,
-      showList
+      showList,
+      search
     } = this.state;
     return (
       <BrowserRouter>
         <header>
           <div className="main-wrapper">
             <div id="header">
-              <Link to="/">
-                <h3 id="logo">Movie Watchlist</h3>
-              </Link>
-              <Search
-                showSearchList={this.showSearchList}
-                showList={showList}
-                getMovieByTitle={this.getMovieByTitle}
-              />
+              <div className="half">
+                <Link to="/">
+                  <h3 id="logo" onClick={this.showSearch}>
+                    Movie Watchlist
+                  </h3>
+                </Link>
+              </div>
+              <div className="half">
+                {search && (
+                  <Fade>
+                    <Search
+                      showSearchList={this.showSearchList}
+                      showList={showList}
+                      getMovieByTitle={this.getMovieByTitle}
+                    />
+                  </Fade>
+                )}
+              </div>
             </div>
           </div>
         </header>
+
         <Route exact path="/">
           <Fade>
+            <Filter toWatchData={toWatchData} fetchData={this.fetchData} />
             <ToWatchList
               hideSearchList={this.hideSearchList}
               toWatchData={toWatchData}

@@ -40,7 +40,6 @@ class Search extends Component {
 
           loading: false
         });
-        console.log(response.data);
       })
       .catch(error => {
         if (axios.isCancel(error) || error) {
