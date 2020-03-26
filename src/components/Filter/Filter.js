@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./Filter.scss";
 
 class Filter extends Component {
@@ -25,7 +25,7 @@ class Filter extends Component {
           },
           // fetchData()
           () => {
-            console.log(this.state.toWatchData);
+            this.props.onFilter(this.state.toWatchData);
           }
         );
       }
@@ -34,11 +34,20 @@ class Filter extends Component {
 
   render() {
     return (
-      <select onChange={this.handleFilter} value={this.state.value}>
-        <option value="Drama">Drama</option>
-        <option value="Horror">Horror</option>
-        <option value="Sci-fi">Sci-fi</option>
-      </select>
+      <Fragment>
+        <select onChange={this.handleFilter} value={this.state.value}>
+          <option value="Drama">Drama</option>
+          <option value="Horror">Horror</option>
+          <option value="Sci-fi">Sci-fi</option>
+          <option value="Crime">Crime</option>
+          <option value="Comedy">Comedy</option>
+          <option value="Action">Action</option>
+          <option value="Thriller">Thriller</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Biography">Biography</option>
+        </select>
+        <button onClick={this.props.resetFilter}>Reset Filter</button>
+      </Fragment>
     );
   }
 }

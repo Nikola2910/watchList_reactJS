@@ -17,6 +17,7 @@ class App extends Component {
     movieTitle: "",
     movieData: {},
     toWatchData: [],
+    filteredData: [],
     watchedData: [],
     movieDetails: {},
     showDetails: false,
@@ -43,7 +44,8 @@ class App extends Component {
       .get(`https://towatchmovies.firebaseio.com/movies.json`)
       .then(responseData => {
         this.setState({
-          toWatchData: this.formatData(responseData)
+          toWatchData: this.formatData(responseData),
+          filteredData: this.formatData(responseData)
         });
       });
   }
@@ -139,6 +141,18 @@ class App extends Component {
       );
   };
 
+  onFilter = data => {
+    this.setState({
+      filteredData: data
+    });
+  };
+
+  resetFilter = () => {
+    this.setState({
+      filteredData: this.state.toWatchData
+    });
+  };
+
   formatData(responseData) {
     const data = [];
 
@@ -163,7 +177,8 @@ class App extends Component {
       movieDetails,
       urlId,
       showList,
-      search
+      search,
+      filteredData
     } = this.state;
     return (
       <BrowserRouter>
@@ -194,10 +209,15 @@ class App extends Component {
 
         <Route exact path="/">
           <Fade>
-            <Filter toWatchData={toWatchData} fetchData={this.fetchData} />
+            <Filter
+              toWatchData={toWatchData}
+              fetchData={this.fetchData}
+              onFilter={this.onFilter}
+              resetFilter={this.resetFilter}
+            />
             <ToWatchList
               hideSearchList={this.hideSearchList}
-              toWatchData={toWatchData}
+              toWatchData={filteredData}
               deleteMovie={this.deleteMovie}
               moveToWatched={this.moveToWatched}
               showMovieDetails={this.showMovieDetails}

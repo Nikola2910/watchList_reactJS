@@ -29,7 +29,11 @@ class ToWatchList extends Component {
           <div className="title-selector">
             <h1>To Watch</h1>
           </div>
+
           {toWatchData.map(movie => {
+            const genres = movie.data.Genre.split(",");
+            // console.log(genres);
+
             return (
               <div key={movie.id} className="toWatchMovie">
                 {/* left */}
@@ -42,7 +46,7 @@ class ToWatchList extends Component {
                         {movie.data.Title}{" "}
                       </h2>
                     </Link>
-                    <p>{movie.data.Genre}</p>
+                    <p>{genres}</p>
                   </div>
                 </div>
                 {/* right */}
