@@ -59,3 +59,66 @@ div.watchedMovie {
     }
   }
 }
+
+
+@media screen and (max-width: 1400px) {
+  
+  div#watchedList h1 {
+    font-size: 2.2em;
+  }
+  div.watchedMovie {
+    padding: 15px 15px;
+  }
+  div.watchedMovie .content span.rating {
+    font-size: 2.2em;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+  }
+  div.watchedMovie .content div.movieInfo h2 {
+    font-size: 1.3em;
+  }
+  div.watchedMovie .content div.movieInfo p {
+      font-size: 1em;
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+
+  div#watchedList h1 {
+    font-size: 1.8em;
+  }
+  div.watchedMovie {
+    padding: 10px 10px;
+  }
+  div.watchedMovie .content span.rating {
+    font-size: 1.8em;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+
+  div#watchedList h1 {
+    font-size: 1.5em;
+  }
+  div.watchedMovie .content span.rating {
+    font-size: 1.5em;
+    padding: 5px;
+    width: 55px;
+    height: 55px;
+  }
+  div.watchedMovie .content div.movieInfo h2 {
+    font-size: 1.1em;
+  }
+  div.watchedMovie .content div.movieInfo p {
+      font-size: 0.8em;
+      font-weight: bold;
+  }
+}

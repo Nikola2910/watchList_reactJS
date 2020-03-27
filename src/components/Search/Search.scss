@@ -97,3 +97,34 @@ div.half {
   align-items: center;
   z-index: 999;
 }
+
+
+// @media screen and (max-width: 1400px) {
+  
+  
+// }
+
+
+@media screen and (max-width: 900px) {
+
+  div.half {
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &div.half:last-child {
+      position: right;
+    }
+  }
+  header div#header h3#logo {
+    font-size: 1.6em;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+
+  header div#header div#input-div input {
+    padding: 5px 10px;
+    width: 200px;
+  }
+}

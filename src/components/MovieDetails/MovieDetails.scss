@@ -67,3 +67,111 @@ div#movie-details {
     }
   }
 }
+
+
+@media screen and (max-width: 1400px) {
+
+  div#movie-details {
+    padding: 25px 0;
+    width: 95%;
+
+    div.details {
+    width: 55%;
+    }
+    div.poster {
+      width: 45%;
+    }
+
+  }
+
+  
+  div#movie-details div.details h1 {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+  }
+  div#movie-details div.details h3 {
+    font-size: 1.3em;
+    margin-bottom: 12px;
+  }
+}
+
+
+@media screen and (max-width: 900px) {
+
+   div#movie-details {
+    padding: 20px 0;
+    width: 95%;
+
+    div.poster {
+      width: 60%;
+      padding: 35px;
+    }
+  }
+
+  div#movie-details div.details {
+    width: 50%;
+  }
+  div#movie-details div.details h1 {
+    font-size: 1.4em;
+    margin-bottom: 12px;
+  }
+  div#movie-details div.details h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  div#movie-details div.poster img {
+    width: 100%;
+
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+
+  header {
+    padding:10px 30px;
+  }
+  div#movie-details {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 90%;
+  }
+  div#movie-details div.details {
+    width: 100%;
+    padding: 30px;
+    margin-left: 30px;
+
+    div#movie-details div.details h1 {
+      width: 50%;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+  }
+  div#movie-details div.details h3 {
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+  div#movie-details div.poster {
+      width: 60%;
+      padding: 30px;
+    }
+}
+
+
+@media screen and (max-width: 1400px) {
+  
+  
+}
+
+
+@media screen and (max-width: 900px) {
+
+
+}
+
+
+@media screen and (max-width: 600px) {
+
+
+}

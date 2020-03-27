@@ -29,10 +29,34 @@ div.filter {
   }
 
   select {
-    width: 200px;
+    width: 150px;
   }
 
   option {
     background-color: rgb(0, 7, 15);
+  }
+}
+
+
+// @media screen and (max-width: 1400px) {
+  
+// }
+
+
+@media screen and (max-width: 900px) {
+
+  div.filter {
+    flex-wrap: wrap;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+
+  div.filter select, div.filter button {
+    width: 125px;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 5px 15px;
   }
 }
