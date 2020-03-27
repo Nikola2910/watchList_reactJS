@@ -45,6 +45,15 @@ div.toWatchMovie {
         font-weight: bold;
         cursor: pointer;
       }
+      span.genre {
+        font-size: 1.2em;
+        cursor: pointer;
+
+        &:hover {
+          color: rgb(0, 195, 255);
+          text-decoration: underline;
+        }
+      }
     }
   }
   div.icons {

@@ -35,18 +35,24 @@ class Filter extends Component {
   render() {
     return (
       <Fragment>
-        <select onChange={this.handleFilter} value={this.state.value}>
-          <option value="Drama">Drama</option>
-          <option value="Horror">Horror</option>
-          <option value="Sci-fi">Sci-fi</option>
-          <option value="Crime">Crime</option>
-          <option value="Comedy">Comedy</option>
-          <option value="Action">Action</option>
-          <option value="Thriller">Thriller</option>
-          <option value="Adventure">Adventure</option>
-          <option value="Biography">Biography</option>
-        </select>
-        <button onClick={this.props.resetFilter}>Reset Filter</button>
+        <div className="main-wrapper">
+          <div className="filter">
+            <select onChange={this.handleFilter} value={this.state.value}>
+              <option value="">Select Genre</option>
+              <option value="Drama">Drama</option>
+              <option value="Horror">Horror</option>
+              <option value="Sci-Fi">Sci-Fi</option>
+              <option value="Crime">Crime</option>
+              <option value="Comedy">Comedy</option>
+              <option value="Action">Action</option>
+              <option value="Thriller">Thriller</option>
+              <option value="Adventure">Adventure</option>
+              <option value="Biography">Biography</option>
+            </select>
+
+            <button onClick={this.props.resetFilter}>Reset Filter</button>
+          </div>
+        </div>
       </Fragment>
     );
   }

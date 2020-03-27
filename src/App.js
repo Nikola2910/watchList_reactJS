@@ -29,6 +29,11 @@ class App extends Component {
   componentDidMount() {
     this.fetchData();
     this.fetchWatchedData();
+    const urlExtension = window.location.pathname.slice(1);
+
+    if (window.location.pathname !== "/") {
+      this.showMovieDetails(urlExtension);
+    }
   }
 
   showSearchList = () => {
@@ -129,15 +134,12 @@ class App extends Component {
     axios
       .get(`http://www.omdbapi.com/?apikey=649e3e66&i=${id}&plot=full`)
       .then(response =>
-        this.setState(
-          {
-            movieDetails: response.data,
-            showDetails: true,
-            urlId: response.data.imdbID,
-            search: false
-          },
-          () => console.log(this.state.urlId)
-        )
+        this.setState({
+          movieDetails: response.data,
+          showDetails: true,
+          urlId: response.data.imdbID,
+          search: false
+        })
       );
   };
 
@@ -169,6 +171,15 @@ class App extends Component {
     this.setState({ search: true });
   };
 
+  onClickedGenre = genre => {
+    const filteredToWatchData = this.state.toWatchData.filter(movie => {
+      return movie.data.Genre.toLowerCase().includes(genre.toLowerCase());
+    });
+    this.setState({
+      filteredData: filteredToWatchData
+    });
+  };
+
   render() {
     const {
       toWatchData,
@@ -180,6 +191,9 @@ class App extends Component {
       search,
       filteredData
     } = this.state;
+    {
+      console.log(search);
+    }
     return (
       <BrowserRouter>
         <header>
@@ -216,6 +230,7 @@ class App extends Component {
               resetFilter={this.resetFilter}
             />
             <ToWatchList
+              onClickedGenre={this.onClickedGenre}
               hideSearchList={this.hideSearchList}
               toWatchData={filteredData}
               deleteMovie={this.deleteMovie}
