@@ -2,13 +2,15 @@ import React, { Component, Fragment } from "react";
 import axios from "axios";
 import Fade from "react-reveal/Fade";
 
+import { Communicator } from "./Communicator";
+
 import "./reset.scss";
 import "./App.scss";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import { Search } from "./components/Search/Search";
 import { MovieList } from "./components/MovieList/MovieList";
-// import { WatchedList } from "./components/WatchedList/WatchedList";
+
 import { MovieDetails } from "./components/MovieDetails/MovieDetails";
 import { Filter } from "./components/Filter/Filter";
 
@@ -45,24 +47,20 @@ class App extends Component {
   };
 
   fetchData() {
-    axios
-      .get(`https://towatchmovies.firebaseio.com/movies.json`)
-      .then(responseData => {
-        this.setState({
-          toWatchData: this.formatData(responseData),
-          filteredData: this.formatData(responseData)
-        });
+    axios.get(Communicator.moviesToWatch).then(responseData => {
+      this.setState({
+        toWatchData: this.formatData(responseData),
+        filteredData: this.formatData(responseData)
       });
+    });
   }
 
   fetchWatchedData() {
-    axios
-      .get(`https://towatchmovies.firebaseio.com/watchedMovies.json`)
-      .then(responseData => {
-        this.setState({
-          watchedData: this.formatData(responseData)
-        });
+    axios.get(Communicator.watchedMovies).then(responseData => {
+      this.setState({
+        watchedData: this.formatData(responseData)
       });
+    });
   }
 
   getMovieByTitle = foundTitle => {
@@ -72,9 +70,7 @@ class App extends Component {
       },
       () => {
         axios
-          .get(
-            `http://www.omdbapi.com/?apikey=649e3e66&t=${this.state.movieTitle}`
-          )
+          .get(`${Communicator.searchByTitle}${this.state.movieTitle}`)
           .then(response => {
             this.setState(
               {
@@ -82,10 +78,7 @@ class App extends Component {
               },
               () => {
                 axios
-                  .post(
-                    `https://towatchmovies.firebaseio.com/movies.json`,
-                    this.state.movieData
-                  )
+                  .post(Communicator.moviesToWatch, this.state.movieData)
                   .then(() => {
                     this.fetchData();
                   });
@@ -97,50 +90,34 @@ class App extends Component {
   };
 
   deleteMovie = movieId => {
-    fetch(`https://towatchmovies.firebaseio.com/movies/${movieId}.json`, {
-      method: "DELETE"
-    }).then(() => this.fetchData());
+    Communicator.delete(movieId).then(() => this.fetchData());
   };
 
   deleteWatchedMovie = movieId => {
-    fetch(
-      `https://towatchmovies.firebaseio.com/watchedMovies/${movieId}.json`,
-      {
-        method: "DELETE"
-      }
-    ).then(() => this.fetchWatchedData());
+    Communicator.deleteWatched(movieId).then(() => this.fetchWatchedData());
   };
 
   moveToWatched = watchedMovie => {
     this.deleteMovie(watchedMovie.id);
 
-    axios
-      .post(
-        `https://towatchmovies.firebaseio.com/watchedMovies.json`,
-        watchedMovie
-      )
-      .then(() =>
-        axios
-          .get(`https://towatchmovies.firebaseio.com/watchedMovies.json`)
-          .then(responseData => {
-            this.setState({
-              watchedData: this.formatData(responseData)
-            });
-          })
-      );
+    axios.post(Communicator.watchedMovies, watchedMovie).then(() =>
+      axios.get(Communicator.watchedMovies).then(responseData => {
+        this.setState({
+          watchedData: this.formatData(responseData)
+        });
+      })
+    );
   };
 
   showMovieDetails = id => {
-    axios
-      .get(`http://www.omdbapi.com/?apikey=649e3e66&i=${id}&plot=full`)
-      .then(response =>
-        this.setState({
-          movieDetails: response.data,
-          showDetails: true,
-          urlId: response.data.imdbID,
-          search: false
-        })
-      );
+    axios.get(Communicator.movieDetails(id)).then(response =>
+      this.setState({
+        movieDetails: response.data,
+        showDetails: true,
+        urlId: response.data.imdbID,
+        search: false
+      })
+    );
   };
 
   onFilter = data => {
@@ -220,11 +197,9 @@ class App extends Component {
             />
 
             <MovieList
-              // onClickedGenre={this.onClickedGenre}
               hideSearchList={this.hideSearchList}
               toWatchData={watchedData}
               deleteMovie={this.deleteWatchedMovie}
-              // moveToWatched={this.moveToWatched}
               showMovieDetails={this.showMovieDetails}
               header={"Watched"}
             />
