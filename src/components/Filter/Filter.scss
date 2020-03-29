@@ -3,6 +3,7 @@ div.filter {
   justify-content: space-between;
   align-items: center;
   height: 120px;
+  flex-wrap: wrap;
 
   h3 {
     font-size: 1.3em;
@@ -34,5 +35,11 @@ div.filter {
 
   option {
     background-color: rgb(0, 7, 15);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  div.filter {
+    flex-direction: column;
   }
 }

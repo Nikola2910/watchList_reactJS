@@ -21,8 +21,9 @@ class WatchedList extends Component {
         }}
       >
         <div className="main-wrapper">
-          <h1>Watched Movies</h1>
-
+          <div className="title-selector">
+            <h1>Watched Movies</h1>
+          </div>
           {watchedData.map(movie => {
             return (
               <div key={movie.id} className="watchedMovie">

@@ -71,3 +71,30 @@ div.title-selector {
   display: flex;
   justify-content: space-between;
 }
+
+@media screen and (max-width: 600px) {
+  div.title-selector {
+    justify-content: center;
+  }
+  div.content {
+    flex-direction: column;
+  }
+  div#toWatchList h1 {
+    font-size: 2.5em;
+  }
+  div.toWatchMovie .content span.rating {
+    font-size: 1.5em;
+    padding: 5px;
+    width: 55px;
+    height: 55px;
+    margin-bottom: 15px;
+  }
+  div.toWatchMovie .content div.movieInfo h2 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+  }
+  div.toWatchMovie .content div.movieInfo span.genre {
+    font-size: 1em;
+    font-weight: bold;
+  }
+}

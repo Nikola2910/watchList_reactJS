@@ -67,3 +67,41 @@ div#movie-details {
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  header {
+    padding: 30px 30px;
+  }
+  div#movie-details {
+    display: flex;
+
+    flex-direction: column;
+    width: 90%;
+  }
+  div#movie-details div.details {
+    width: 100%;
+    padding: 30px 5px;
+    margin-left: 30px;
+
+    span.rating-big {
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    div#movie-details div.details h1 {
+      width: 50%;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+  }
+
+  div#movie-details div.details h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  div#movie-details div.poster {
+    width: 250px;
+
+    justify-content: center;
+  }
+}

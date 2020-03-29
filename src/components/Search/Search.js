@@ -88,7 +88,7 @@ class Search extends Component {
             ) : (
               results.map(foundMovie => {
                 return (
-                  <li key={foundMovie.imdbID} className="foundMovie">
+                  <li key={uuid()} className="foundMovie">
                     <span> {foundMovie.Title} </span>{" "}
                     <ReactTooltip
                       id="add"

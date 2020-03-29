@@ -196,6 +196,7 @@ class App extends Component {
     }
     return (
       <BrowserRouter>
+        {/* OVO TREBA PREPRAVITI MALO */}
         <header>
           <div className="main-wrapper">
             <div id="header">
