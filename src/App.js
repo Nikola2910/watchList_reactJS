@@ -197,30 +197,16 @@ class App extends Component {
     return (
       <BrowserRouter>
         {/* OVO TREBA PREPRAVITI MALO */}
-        <header>
-          <div className="main-wrapper">
-            <div id="header">
-              <div className="half">
-                <Link to="/">
-                  <h3 id="logo" onClick={this.showSearch}>
-                    Movie Watchlist
-                  </h3>
-                </Link>
-              </div>
-              <div className="half">
-                {search && (
-                  <Fade>
-                    <Search
-                      showSearchList={this.showSearchList}
-                      showList={showList}
-                      getMovieByTitle={this.getMovieByTitle}
-                    />
-                  </Fade>
-                )}
-              </div>
-            </div>
-          </div>
-        </header>
+
+        <Fade>
+          <Search
+            search={this.state.search}
+            showSearch={this.showSearch}
+            showSearchList={this.showSearchList}
+            showList={showList}
+            getMovieByTitle={this.getMovieByTitle}
+          />
+        </Fade>
 
         <Route exact path="/">
           <Fade>

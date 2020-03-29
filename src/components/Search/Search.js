@@ -6,6 +6,8 @@ import loader from "../../img/loader.gif";
 import ReactTooltip from "react-tooltip";
 import Fade from "react-reveal/Fade";
 
+import { Link } from "react-router-dom";
+
 import "./Search.scss";
 
 class Search extends Component {
@@ -119,23 +121,45 @@ class Search extends Component {
 
   render() {
     const { searchTerm, loading } = this.state;
-    const { showSearchList } = this.props;
+    const { showSearchList, showSearch, search } = this.props;
 
     return (
-      <div id="input-div">
-        <input
-          onClick={() => {
-            showSearchList();
-          }}
-          type="text"
-          value={searchTerm}
-          placeholder="Search movie"
-          onChange={this.handleInputChange}
-        />
+      <header>
+        <div className="main-wrapper">
+          <div id="header">
+            <div className="half">
+              <Link to="/">
+                <h3
+                  id="logo"
+                  onClick={() => {
+                    showSearch();
+                  }}
+                >
+                  Movie Watchlist
+                </h3>
+              </Link>
+            </div>
+            <div className="half">
+              <div id="input-div">
+                {search && (
+                  <input
+                    onClick={() => {
+                      showSearchList();
+                    }}
+                    type="text"
+                    value={searchTerm}
+                    placeholder="Search movie"
+                    onChange={this.handleInputChange}
+                  />
+                )}
 
-        {/* Results */}
-        {this.renderSearchResults()}
-      </div>
+                {/* Results */}
+                {this.renderSearchResults()}
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
     );
   }
 }
