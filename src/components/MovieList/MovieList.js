@@ -7,15 +7,16 @@ import ReactTooltip from "react-tooltip";
 import watched from "../../img/hidden.png";
 import trash from "../../img/trash.png";
 
-import "./ToWatchList.scss";
+import "./MovieList.scss";
 
-function ToWatchList({
+function MovieList({
   toWatchData,
   deleteMovie,
   moveToWatched,
   showMovieDetails,
   hideSearchList,
-  onClickedGenre
+  onClickedGenre,
+  header
 }) {
   return (
     <div
@@ -26,12 +27,11 @@ function ToWatchList({
     >
       <div className="main-wrapper">
         <div className="title-selector">
-          <h1>To Watch</h1>
+          <h1>{header}</h1>
         </div>
 
         {toWatchData.map(movie => {
           const genres = movie.data.Genre.split(", ");
-          // console.log(genres);
 
           return (
             <div key={movie.id} className="toWatchMovie">
@@ -64,6 +64,15 @@ function ToWatchList({
               </div>
               {/* right */}
               <div className="icons">
+                {header == "To Watch" && (
+                  <img
+                    data-tip
+                    data-for="watched"
+                    src={watched}
+                    alt=""
+                    onClick={() => moveToWatched(movie)}
+                  />
+                )}
                 <ReactTooltip
                   id="watched"
                   place="top"
@@ -73,13 +82,7 @@ function ToWatchList({
                 >
                   <span> Watched Movie </span>
                 </ReactTooltip>
-                <img
-                  data-tip
-                  data-for="watched"
-                  src={watched}
-                  alt=""
-                  onClick={() => moveToWatched(movie)}
-                />
+
                 <ReactTooltip
                   id="delete"
                   place="top"
@@ -104,4 +107,4 @@ function ToWatchList({
   );
 }
 
-export { ToWatchList };
+export { MovieList };

@@ -7,8 +7,8 @@ import "./App.scss";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import { Search } from "./components/Search/Search";
-import { ToWatchList } from "./components/ToWatchList/ToWatchList";
-import { WatchedList } from "./components/WatchedList/WatchedList";
+import { MovieList } from "./components/MovieList/MovieList";
+// import { WatchedList } from "./components/WatchedList/WatchedList";
 import { MovieDetails } from "./components/MovieDetails/MovieDetails";
 import { Filter } from "./components/Filter/Filter";
 
@@ -162,8 +162,6 @@ class App extends Component {
       data.push({ ...responseData.data[item], id: item });
     }
 
-    console.log(data);
-
     return data;
   }
 
@@ -191,22 +189,16 @@ class App extends Component {
       search,
       filteredData
     } = this.state;
-    {
-      console.log(search);
-    }
+
     return (
       <BrowserRouter>
-        {/* OVO TREBA PREPRAVITI MALO */}
-
-        <Fade>
-          <Search
-            search={this.state.search}
-            showSearch={this.showSearch}
-            showSearchList={this.showSearchList}
-            showList={showList}
-            getMovieByTitle={this.getMovieByTitle}
-          />
-        </Fade>
+        <Search
+          search={this.state.search}
+          showSearch={this.showSearch}
+          showSearchList={this.showSearchList}
+          showList={showList}
+          getMovieByTitle={this.getMovieByTitle}
+        />
 
         <Route exact path="/">
           <Fade>
@@ -215,21 +207,26 @@ class App extends Component {
               fetchData={this.fetchData}
               onFilter={this.onFilter}
               resetFilter={this.resetFilter}
+              hideSearchList={this.hideSearchList}
             />
-            <ToWatchList
+            <MovieList
               onClickedGenre={this.onClickedGenre}
               hideSearchList={this.hideSearchList}
               toWatchData={filteredData}
               deleteMovie={this.deleteMovie}
               moveToWatched={this.moveToWatched}
               showMovieDetails={this.showMovieDetails}
+              header={"To Watch"}
             />
 
-            <WatchedList
-              watchedData={watchedData}
-              deleteWatchedMovie={this.deleteWatchedMovie}
-              showMovieDetails={this.showMovieDetails}
+            <MovieList
+              // onClickedGenre={this.onClickedGenre}
               hideSearchList={this.hideSearchList}
+              toWatchData={watchedData}
+              deleteMovie={this.deleteWatchedMovie}
+              // moveToWatched={this.moveToWatched}
+              showMovieDetails={this.showMovieDetails}
+              header={"Watched"}
             />
           </Fade>
         </Route>

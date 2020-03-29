@@ -1,6 +1,7 @@
 header {
   width: 100%;
   padding: 20px 20px;
+  position: relative;
 
   div#header {
     display: flex;
@@ -36,7 +37,8 @@ header {
         height: 150px;
         width: 300px;
         padding: 10px 10px;
-        z-index: 999999;
+        z-index: 10000;
+
         &::-webkit-scrollbar {
           width: 12px;
         }
@@ -52,6 +54,7 @@ header {
         }
 
         li {
+          position: relative;
           width: 100%;
           display: flex;
           justify-content: space-between;
@@ -59,7 +62,6 @@ header {
           align-items: center;
           padding: 5px 5px;
           border-radius: 5px;
-          z-index: 99999;
 
           &:hover {
             background-color: white;
@@ -95,7 +97,7 @@ div.half {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+
   min-width: 300px;
 }
 
@@ -116,7 +118,7 @@ div.half {
 @media screen and (max-width: 600px) {
   header div#header div#input-div input {
     padding: 5px 10px;
-    width: 250px;
+    width: 280px;
   }
 
   h3#logo {
@@ -128,15 +130,11 @@ div.half {
   }
 }
 
-
 // @media screen and (max-width: 1400px) {
-  
-  
+
 // }
 
-
 @media screen and (max-width: 900px) {
-
   div.half {
     flex-wrap: wrap;
     justify-content: space-between;
@@ -147,14 +145,5 @@ div.half {
   }
   header div#header h3#logo {
     font-size: 1.6em;
-  }
-}
-
-
-@media screen and (max-width: 600px) {
-
-  header div#header div#input-div input {
-    padding: 5px 10px;
-    width: 200px;
   }
 }

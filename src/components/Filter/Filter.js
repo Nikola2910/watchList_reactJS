@@ -33,10 +33,16 @@ class Filter extends Component {
   };
 
   render() {
+    const { hideSearchList } = this.props;
     return (
       <Fragment>
         <div className="main-wrapper">
-          <div className="filter">
+          <div
+            className="filter"
+            onClick={() => {
+              hideSearchList();
+            }}
+          >
             <select onChange={this.handleFilter} value={this.state.value}>
               <option value="">Select Genre</option>
               <option value="Drama">Drama</option>

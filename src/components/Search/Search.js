@@ -139,18 +139,21 @@ class Search extends Component {
                 </h3>
               </Link>
             </div>
+
             <div className="half">
               <div id="input-div">
                 {search && (
-                  <input
-                    onClick={() => {
-                      showSearchList();
-                    }}
-                    type="text"
-                    value={searchTerm}
-                    placeholder="Search movie"
-                    onChange={this.handleInputChange}
-                  />
+                  <Fade>
+                    <input
+                      onClick={() => {
+                        showSearchList();
+                      }}
+                      type="text"
+                      value={searchTerm}
+                      placeholder="Search movie"
+                      onChange={this.handleInputChange}
+                    />
+                  </Fade>
                 )}
 
                 {/* Results */}
